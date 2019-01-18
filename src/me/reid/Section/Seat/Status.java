@@ -1,4 +1,4 @@
-package me.reid.Section;
+package me.reid.Section.Seat;
 
 public enum Status {
     OCCUPIED(0), AVAILABLE(1), BLACK(2), HANDICAP(3);

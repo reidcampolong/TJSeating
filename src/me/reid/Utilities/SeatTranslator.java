@@ -12,6 +12,6 @@ public class SeatTranslator {
     }
 
     public static String getName(int col, int row) {
-        return ((char) (col + 65))+ "" + row;
+        return ((char) (90-col))+ "" + row;
     }
 }

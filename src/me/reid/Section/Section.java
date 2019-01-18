@@ -3,6 +3,8 @@ package me.reid.Section;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import me.reid.Section.Seat.Seat;
+import me.reid.Section.Seat.Status;
 import me.reid.Utilities.SeatTranslator;
 
 /**
@@ -11,7 +13,7 @@ import me.reid.Utilities.SeatTranslator;
 public class Section {
 
     private GridPane gridPane;
-    private Button[][] buttons;
+    private Seat[][] seats;
 
     public Section(int cols, int rows) {
         gridPane = new GridPane();
@@ -20,24 +22,17 @@ public class Section {
     }
 
     private void initPane(int cols, int rows) {
-        buttons = new Button[cols][rows];
-        for (int col = 0; col < buttons.length; col++) {
-            for (int row = 0; row < buttons[col].length; row++) {
+        seats = new Seat[cols][rows];
+        for (int col = 0; col < seats.length; col++) {
+            for (int row = 0; row < seats[col].length; row++) {
 
-                Button button = new Button(SeatTranslator.getName(col, row));
-                button.getProperties().put("pos", new int[]{col, row});
-                buttons[col][row] = button;
+                // Create seat
+                Seat seat = new Seat(this, col, row,"None", Status.AVAILABLE);
+                seats[col][row] = seat;
 
-                button.setPrefWidth(55);
-                button.setPrefHeight(15);
-                GridPane.setConstraints(button, row, col);
+                // Add to screen
+                gridPane.getChildren().add(seat.getClientButton());
 
-                gridPane.getChildren().add(button);
-                button.setOnMouseClicked(event ->
-                {
-                    int[] properties = (int[]) button.getProperties().get("pos");
-                    System.out.println(SeatTranslator.getName(properties[0], properties[1]));
-                });
             }
 
         }

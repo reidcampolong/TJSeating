@@ -6,6 +6,9 @@ import me.reid.Listeners.SeatClickListener;
 import me.reid.Section.Section;
 import me.reid.Utilities.SeatTranslator;
 
+/**
+ * A seat object that holds the button
+ */
 public class Seat {
 
     private Section section;
@@ -15,6 +18,14 @@ public class Seat {
     private Status seatStatus;
     private String seatHolder;
 
+    /**
+     * Constructs a new seat
+     * @param section
+     * @param y - column in section
+     * @param x - row in row
+     * @param seatHolder
+     * @param seatStatus
+     */
     public Seat(Section section, int y, int x, String seatHolder, Status seatStatus) {
         this.section = section;
         this.x = x;

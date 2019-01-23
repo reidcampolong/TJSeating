@@ -5,6 +5,9 @@ import javafx.event.EventHandler;
 import me.reid.Section.Seat.Seat;
 import me.reid.Section.Seat.Status;
 
+/**
+ * A listener for each seat button
+ */
 public class SeatClickListener implements EventHandler<ActionEvent> {
 
     private Seat seat;

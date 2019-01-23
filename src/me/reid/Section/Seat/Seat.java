@@ -52,8 +52,8 @@ public class Seat {
     private void createButton() {
 
         clientButton = new Button(SeatTranslator.getName(y, x));
-        clientButton.setPrefWidth(55);
-        clientButton.setPrefHeight(10);
+        clientButton.setPrefWidth(50);
+        clientButton.setPrefHeight(6);
 
         updateSeatStyle();
 

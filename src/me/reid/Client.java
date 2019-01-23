@@ -5,7 +5,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import me.reid.Section.AdminSection;
 import me.reid.Section.Section;
 
 public class Client extends Application {
@@ -24,11 +26,18 @@ public class Client extends Application {
         middleSection.getGridPane().setAlignment(Pos.CENTER);
         rightSection.getGridPane().setAlignment(Pos.CENTER);
 
-        HBox box = new HBox();
-        box.getChildren().addAll(leftSection.getGridPane(), middleSection.getGridPane(), rightSection.getGridPane());
-        box.setAlignment(Pos.CENTER);
+        HBox horozontalContainer = new HBox();
+        horozontalContainer.getChildren().addAll(leftSection.getGridPane(), middleSection.getGridPane(), rightSection.getGridPane());
+        horozontalContainer.setAlignment(Pos.CENTER);
 
-        Scene scene = new Scene(box, 1300, 850);
+        AdminSection adminSection = new AdminSection();
+        adminSection.getGridPane().setAlignment(Pos.CENTER);
+
+        VBox verticalContainer = new VBox();
+        verticalContainer.setAlignment(Pos.CENTER);
+        verticalContainer.getChildren().addAll(adminSection.getGridPane(), horozontalContainer);
+
+        Scene scene = new Scene(verticalContainer, 1300, 850);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

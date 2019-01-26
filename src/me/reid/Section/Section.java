@@ -17,7 +17,7 @@ public class Section {
 
     public Section(int cols, int rows) {
         gridPane = new GridPane();
-        gridPane.setPadding(new Insets(10, 10, 10, 10));
+        gridPane.setPadding(new Insets(2, 10, 5, 10));
         this.initPane(cols, rows);
     }
 

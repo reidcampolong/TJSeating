@@ -1,11 +1,11 @@
-package me.reid.Section;
+package me.reid.Section.Admin;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
 /**
- * Created by Reid on 1/23/19.
+ * Contains buttons used only by admins
  */
 public class AdminSection {
 
@@ -13,7 +13,7 @@ public class AdminSection {
 
     public AdminSection() {
         gridPane = new GridPane();
-        gridPane.setPadding(new Insets(10, 10, 10, 10));
+        gridPane.setPadding(new Insets(2, 10, 2, 10));
         gridPane.getChildren().add(new Button("Admin"));
     }
 

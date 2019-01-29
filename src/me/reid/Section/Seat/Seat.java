@@ -11,6 +11,8 @@ import me.reid.Utilities.SeatTranslator;
  */
 public class Seat {
 
+    private String sectionTitle;
+
     private Section section;
     private int x, y;
     private Button clientButton;
@@ -32,6 +34,7 @@ public class Seat {
         this.y = y;
         this.seatHolder = seatHolder;
         this.seatStatus = seatStatus;
+        this.sectionTitle = SeatTranslator.getName(y, x);
 
         createButton();
     }
@@ -83,6 +86,10 @@ public class Seat {
 
     public int getY() {
         return y;
+    }
+
+    public String getSectionTitle() {
+        return sectionTitle;
     }
 
 }

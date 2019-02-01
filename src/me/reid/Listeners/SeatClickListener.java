@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
 import me.reid.Section.Seat.Seat;
 import me.reid.Section.Seat.Status;
+import me.reid.Utilities.StringUtils;
 
 import java.util.Optional;
 
@@ -28,34 +29,13 @@ public class SeatClickListener implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {
         System.out.println(seat.getX() + "&" + seat.getY());
-        seat.changeStatus(Status.BLACK);
-
-        /*List<String> choices = new ArrayList<>();
-        choices.add("Occupy");
-        choices.add("Available");
-        choices.add("Black-Out");
-
-        ChoiceDialog<String> dialog = new ChoiceDialog<>("Occupy", choices);
-        dialog.setTitle("TJSeating - Reid C");
-        dialog.setHeaderText("Seat: " + seat.getSectionTitle());
-        dialog.setContentText("Choose your letter:");
-
-// Traditional way to get the response value.
-        Optional<String> result = dialog.showAndWait();
-        if (result.isPresent()) {
-            System.out.println("Your choice: " + result.get());
-        }
-
-// The Java 8 way to get the response value (with lambda expression).
-        result.ifPresent(letter -> System.out.println("Your choice: " + letter));*/
-        handleInputForSeats(seat);
-
+        handleInputForSeat(seat);
     }
 
-    public void handleInputForSeats(Seat... seat) {
+    public void handleInputForSeat(Seat seat) {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
-        dialog.setTitle("Login Dialog");
-        dialog.setHeaderText("Look, a Custom Login Dialog");
+        dialog.setTitle("Seat Editor");
+        dialog.setHeaderText("Seat " + seat.getSectionTitle() + "\n" + "Holder: " + seat.getSeatHolder() + "\n" + "Status: " + seat.getSeatStatus());
 
         ButtonType finishButton = new ButtonType("Finish", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(finishButton, ButtonType.CANCEL);
@@ -66,11 +46,17 @@ public class SeatClickListener implements EventHandler<ActionEvent> {
         grid.setPadding(new Insets(20, 150, 10, 10));
 
         ComboBox statusSelector = new ComboBox();
-        statusSelector.setValue("Occupied");
-        statusSelector.getItems().addAll("Occupied", "Available", "Black");
+
+        if (seat.getSeatStatus() == Status.AVAILABLE)
+            statusSelector.setValue("Occupied");
+        else
+            statusSelector.setValue(StringUtils.properCase(seat.getSeatStatus().toString()));
+        statusSelector.getItems().addAll("Occupied", "Available", "Black", "Handicap");
 
         TextField seatHolder = new TextField();
         seatHolder.setPromptText("Customer Name");
+        if (!seat.getSeatHolder().equals("None"))
+            seatHolder.setText(seat.getSeatHolder());
 
         grid.add(new Label("Status:"), 0, 0);
         grid.add(statusSelector, 1, 0);
@@ -88,8 +74,32 @@ public class SeatClickListener implements EventHandler<ActionEvent> {
         });
 
         Optional<Pair<String, String>> result = dialog.showAndWait();
-        if(result.isPresent()) {
-            this.seat.changeStatus(Status.valueOf(result.get().getKey().toUpperCase()));
+        if (result.isPresent()) {
+
+            if(result.get().getValue().trim().equals("")) {
+
+
+            }
+            // Update seat status
+            Status newStatus = Status.valueOf(result.get().getKey().toUpperCase());
+
+            if (newStatus == Status.OCCUPIED) {
+                String holder = result.get().getValue();
+                if(holder.trim().equals("")) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Seat Editor");
+                    alert.setHeaderText(null);
+                    alert.setContentText("You must specify a customer's name!");
+
+                    alert.showAndWait();
+                    handleInputForSeat(seat);
+                    return;
+                } else {
+                    this.seat.changeSeatHolder(holder);
+                }
+            } else
+                this.seat.changeSeatHolder("None");
+            seat.changeStatus(newStatus);
         }
     }
 

@@ -44,6 +44,10 @@ public class Seat {
         updateSeatStyle();
     }
 
+    public void changeSeatHolder(String newHolder) {
+        this.seatHolder = newHolder;
+    }
+
     private void updateSeatStyle() {
         String colorString = "";
         switch(seatStatus) {
@@ -90,6 +94,14 @@ public class Seat {
 
     public String getSectionTitle() {
         return sectionTitle;
+    }
+
+    public String getSeatHolder() {
+        return seatHolder;
+    }
+
+    public Status getSeatStatus() {
+        return seatStatus;
     }
 
 }

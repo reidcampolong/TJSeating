@@ -39,15 +39,26 @@ public class Seat {
         createButton();
     }
 
+    /**
+     * Changes the seat status and updates the style
+     * @param newStatus
+     */
     public void changeStatus(Status newStatus) {
         this.seatStatus = newStatus;
         updateSeatStyle();
     }
 
+    /**
+     * Changes the seat holder
+     * @param newHolder
+     */
     public void changeSeatHolder(String newHolder) {
         this.seatHolder = newHolder;
     }
 
+    /**
+     * Visually updates a seat's style
+     */
     private void updateSeatStyle() {
         String colorString = "";
         switch(seatStatus) {
@@ -67,6 +78,9 @@ public class Seat {
         clientButton.setStyle("-fx-font-weight: bold; -fx-font-size: 13; -fx-background-color: #"+colorString+"; -fx-border-color: #000000; -fx-border-width: 1px;");
     }
 
+    /**
+     * Initialzes the seat's button
+     */
     private void createButton() {
 
         clientButton = new Button(SeatTranslator.getName(y, x));

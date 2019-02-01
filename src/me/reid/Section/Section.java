@@ -21,6 +21,11 @@ public class Section {
         this.initPane(cols, rows);
     }
 
+    /**
+     * Initializes pane with seat buttons
+     * @param cols
+     * @param rows
+     */
     private void initPane(int cols, int rows) {
         seats = new Seat[cols][rows];
         for (int col = 0; col < seats.length; col++) {

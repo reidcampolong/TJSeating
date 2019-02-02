@@ -4,8 +4,10 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
+import me.reid.Section.Admin.GroupClickHandler;
 import me.reid.Utilities.StringUtils;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -25,11 +27,22 @@ public class SeatHandler {
     }
 
     /**
+     *
+     */
+    public static void handleGroupInput(List<Seat> seatList) {
+
+    }
+
+    /**
      * Creates a popup and allows for the changing of a seat's status
      *
      * @param seat
      */
     public static void handleInputForSeat(Seat seat) {
+        if(GroupClickHandler.isGroupSelectEnabled()) {
+            GroupClickHandler.addToList(seat);
+            return;
+        }
         Dialog<Pair<String, String>> dialog = new Dialog<>();
         dialog.setTitle("Seat Editor");
         dialog.setHeaderText("Seat " + seat.getSectionTitle() + "\n" + "Holder: " + seat.getSeatHolder() + "\n" + "Status: " + seat.getSeatStatus());

@@ -14,15 +14,18 @@ public class GroupButton extends AdminButton {
 
     @Override
     public void handle(ActionEvent event) {
-        if(isSelected()) {
-            finalizeGroupSelect();
-        }else
+        if (isSelected()) {
+            GroupClickHandler.i().toggleGroupSelect(false);
+            setSelected(false);
+        } else {
+            GroupClickHandler.i().toggleGroupSelect(true);
             setSelected(true);
+        }
         updateStyle();
     }
 
     public void finalizeGroupSelect() {
-        GroupClickHandler.getGroupSeatList();
+
         setSelected(false);
     }
 

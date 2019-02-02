@@ -18,7 +18,6 @@ public class SeatClickListener implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent event) {
-        System.out.println(seat.getX() + "&" + seat.getY());
         SeatHandler.handleInputForSeat(seat);
     }
 

@@ -11,12 +11,13 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Created by Reid on 1/31/19.
+ * Handles creating popups and seat click event logic
  */
 public class SeatHandler {
 
     /**
      * Updates the seat's holder and status
+     *
      * @param seat
      * @param newStatus
      * @param holder
@@ -27,25 +28,18 @@ public class SeatHandler {
     }
 
     /**
+     * Creates a popup dialog to read input from the customer
      *
+     * @param title
+     * @param headerText
+     * @param defaultStatus
+     * @param customerName
+     * @return [Status(String), CustomerName(String)]
      */
-    public static void handleGroupInput(List<Seat> seatList) {
-
-    }
-
-    /**
-     * Creates a popup and allows for the changing of a seat's status
-     *
-     * @param seat
-     */
-    public static void handleInputForSeat(Seat seat) {
-        if(GroupClickHandler.isGroupSelectEnabled()) {
-            GroupClickHandler.addToList(seat);
-            return;
-        }
+    public static Optional<Pair<String, String>> createPopupAndGetFeedback(String title, String headerText, String defaultStatus, String customerName) {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
-        dialog.setTitle("Seat Editor");
-        dialog.setHeaderText("Seat " + seat.getSectionTitle() + "\n" + "Holder: " + seat.getSeatHolder() + "\n" + "Status: " + seat.getSeatStatus());
+        dialog.setTitle(title);
+        dialog.setHeaderText(headerText);
 
         ButtonType finishButton = new ButtonType("Finish", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(finishButton, ButtonType.CANCEL);
@@ -57,16 +51,13 @@ public class SeatHandler {
 
         ComboBox statusSelector = new ComboBox();
 
-        if (seat.getSeatStatus() == Status.AVAILABLE)
-            statusSelector.setValue("Occupied");
-        else
-            statusSelector.setValue(StringUtils.properCase(seat.getSeatStatus().toString()));
+        statusSelector.setValue(defaultStatus);
         statusSelector.getItems().addAll("Occupied", "Available", "Black", "Handicap");
 
         TextField seatHolder = new TextField();
         seatHolder.setPromptText("Customer Name");
-        if (!seat.getSeatHolder().equals("None"))
-            seatHolder.setText(seat.getSeatHolder());
+        if (!customerName.equals("None"))
+            seatHolder.setText(customerName);
 
         grid.add(new Label("Status:"), 0, 0);
         grid.add(statusSelector, 1, 0);
@@ -82,8 +73,43 @@ public class SeatHandler {
             }
             return null;
         });
+        return dialog.showAndWait();
+    }
 
-        Optional<Pair<String, String>> result = dialog.showAndWait();
+    /**
+     * Creates an alert popup with a message
+     *
+     * @param title
+     * @param reason
+     */
+    public static void createBadPopup(String title, String reason) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(reason);
+
+        alert.showAndWait();
+    }
+
+    /**
+     * Creates a popup and allows for the changing of a seat's status
+     *
+     * @param seat
+     */
+    public static void handleInputForSeat(Seat seat) {
+        if (GroupClickHandler.i().isGroupSelectEnabled()) {
+            GroupClickHandler.i().addToList(seat);
+            return;
+        }
+
+        String headerText = "Seat " + seat.getSectionTitle() + "\n" + "Holder: " + seat.getSeatHolder() + "\n" + "Status: " + seat.getSeatStatus();
+        String defaultStatus;
+        if (seat.getSeatStatus() == Status.AVAILABLE)
+            defaultStatus = "Occupied";
+        else
+            defaultStatus = StringUtils.properCase(seat.getSeatStatus().toString());
+
+        Optional<Pair<String, String>> result = createPopupAndGetFeedback("Seat Editor", headerText, defaultStatus, seat.getSeatHolder());
         if (result.isPresent()) {
 
             // Update seat status
@@ -92,12 +118,7 @@ public class SeatHandler {
             if (newStatus == Status.OCCUPIED) {
                 String holder = result.get().getValue();
                 if (holder.trim().equals("")) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Seat Editor");
-                    alert.setHeaderText(null);
-                    alert.setContentText("You must specify a customer's name!");
-
-                    alert.showAndWait();
+                    createBadPopup("Seat Editor", "You must enter a customers name!");
                     handleInputForSeat(seat);
                     return;
                 } else {

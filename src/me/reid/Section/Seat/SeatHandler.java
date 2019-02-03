@@ -4,6 +4,9 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
+import me.reid.Client;
+import me.reid.Network.Packet.NetworkSeat;
+import me.reid.Network.Packet.TJRequest;
 import me.reid.Section.Admin.GroupClickHandler;
 import me.reid.Utilities.StringUtils;
 
@@ -122,10 +125,19 @@ public class SeatHandler {
                     handleInputForSeat(seat);
                     return;
                 } else {
-                    updateSeat(seat, newStatus, holder);
+                    attemptPurchase(seat, newStatus, holder);
+                    //updateSeat(seat, newStatus, holder);
                 }
-            } else
-                updateSeat(seat, newStatus, "None");
+            } //else
+                //updateSeat(seat, newStatus, "None");
         }
+    }
+
+    private static void attemptPurchase(Seat seat, Status newStatus, String holder) {
+        System.out.println("Writing out...");
+        NetworkSeat ns = new NetworkSeat(seat.getSectionNumber(), newStatus.toString(), holder, seat.getX(), seat.getY());
+        TJRequest toSend = new TJRequest(TJRequest.RequestType.PURCHASE_SEAT_REQUEST, ns);
+        System.out.println(toSend);
+        Client.getConnection().writeOut(toSend);
     }
 }

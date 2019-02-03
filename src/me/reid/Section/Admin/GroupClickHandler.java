@@ -31,7 +31,7 @@ public class GroupClickHandler {
         if(toggleOn) {
             groupSeatList.clear();
         } else {
-            SeatHandler.
+            //SeatHandler.
         }
     }
 

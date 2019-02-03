@@ -12,10 +12,12 @@ import me.reid.Utilities.SeatTranslator;
  */
 public class Section {
 
+    private int sectionNumber;
     private GridPane gridPane;
     private Seat[][] seats;
 
-    public Section(int cols, int rows) {
+    public Section(int sectionNumber, int cols, int rows) {
+        this.sectionNumber = sectionNumber;
         gridPane = new GridPane();
         gridPane.setPadding(new Insets(2, 10, 5, 10));
         this.initPane(cols, rows);
@@ -32,7 +34,7 @@ public class Section {
             for (int row = 0; row < seats[col].length; row++) {
 
                 // Create seat
-                Seat seat = new Seat(this, col, row,"None", Status.AVAILABLE);
+                Seat seat = new Seat(0, col, row,"None", Status.AVAILABLE);
                 seats[col][row] = seat;
 
                 // Add to screen

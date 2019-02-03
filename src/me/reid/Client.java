@@ -6,20 +6,34 @@ import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import me.reid.Network.Connection.NetworkConnection;
+import me.reid.Network.ServerInputListener;
 import me.reid.Section.Admin.AdminSection;
+import me.reid.Section.Seat.SeatHandler;
 import me.reid.Section.Section;
+
+import java.io.IOException;
+import java.net.Socket;
 
 public class Client extends Application {
 
+    private String ip = "localhost";
+    private int port = 1069;
+    private ServerInputListener serverInputListener;
+    private static NetworkConnection networkConnection;
     private static final String VERSION = ".5";
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        // Connect to the server
+        initializeConnection();
+
         primaryStage.setTitle("TJ Seating by Reid Campolong v" + VERSION);
 
-        Section leftSection = new Section(26, 7);
-        Section middleSection = new Section(26, 7);
-        Section rightSection = new Section(26, 7);
+        Section leftSection = new Section(0, 26, 7);
+        Section middleSection = new Section(1,26, 7);
+        Section rightSection = new Section(2,26, 7);
 
         leftSection.getGridPane().setAlignment(Pos.CENTER);
         middleSection.getGridPane().setAlignment(Pos.CENTER);
@@ -41,6 +55,21 @@ public class Client extends Application {
         primaryStage.show();
     }
 
+    public void initializeConnection() {
+        try {
+            networkConnection = new NetworkConnection(new Socket(ip, port));
+            serverInputListener = new ServerInputListener(networkConnection);
+            serverInputListener.start();
+        } catch (IOException e) {
+            SeatHandler.createBadPopup("TJSeating - Network", "Could not connect to the server. Please launch the server jar and then try again!");
+            System.exit(0);
+        }
+
+    }
+
+    public static NetworkConnection getConnection() {
+        return networkConnection;
+    }
     public static void main(String[] args) {
         launch(args);
     }

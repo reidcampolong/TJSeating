@@ -11,6 +11,7 @@ import me.reid.Utilities.SeatTranslator;
  */
 public class Seat {
 
+    private int sectionNumber;
     private String sectionTitle;
 
     private Section section;
@@ -28,8 +29,8 @@ public class Seat {
      * @param seatHolder
      * @param seatStatus
      */
-    public Seat(Section section, int y, int x, String seatHolder, Status seatStatus) {
-        this.section = section;
+    public Seat(int sectionNumber, int y, int x, String seatHolder, Status seatStatus) {
+        this.sectionNumber = sectionNumber;
         this.x = x;
         this.y = y;
         this.seatHolder = seatHolder;
@@ -116,6 +117,10 @@ public class Seat {
 
     public Status getSeatStatus() {
         return seatStatus;
+    }
+
+    public int getSectionNumber() {
+        return sectionNumber;
     }
 
 }

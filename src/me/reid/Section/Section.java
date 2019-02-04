@@ -34,17 +34,23 @@ public class Section {
             for (int row = 0; row < seats[col].length; row++) {
 
                 // Create seat
-                Seat seat = new Seat(0, col, row,"None", Status.AVAILABLE);
+                Seat seat = new Seat(sectionNumber, col, row,"None", Status.AVAILABLE);
                 seats[col][row] = seat;
 
                 // Add to screen
                 gridPane.getChildren().add(seat.getClientButton());
 
             }
-
         }
     }
 
+    public Seat getSeatAtIndex(int x, int y) {
+        return seats[x][y];
+    }
+
+    public int getSectionNumber() {
+        return sectionNumber;
+    }
     public GridPane getGridPane() {
         return gridPane;
     }

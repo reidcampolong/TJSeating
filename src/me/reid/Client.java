@@ -11,6 +11,7 @@ import me.reid.Network.ServerInputListener;
 import me.reid.Section.Admin.AdminSection;
 import me.reid.Section.Seat.SeatHandler;
 import me.reid.Section.Section;
+import me.reid.Section.SectionHandler;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -20,8 +21,10 @@ public class Client extends Application {
     private String ip = "localhost";
     private int port = 1069;
     private ServerInputListener serverInputListener;
-    private static NetworkConnection networkConnection;
     private static final String VERSION = ".5";
+
+    private static NetworkConnection networkConnection;
+    private static SectionHandler sectionHandler;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -31,9 +34,14 @@ public class Client extends Application {
 
         primaryStage.setTitle("TJ Seating by Reid Campolong v" + VERSION);
 
+        sectionHandler = new SectionHandler();
         Section leftSection = new Section(0, 26, 7);
         Section middleSection = new Section(1,26, 7);
         Section rightSection = new Section(2,26, 7);
+
+        sectionHandler.addSection(leftSection.getSectionNumber(), leftSection);
+        sectionHandler.addSection(middleSection.getSectionNumber(), middleSection);
+        sectionHandler.addSection(rightSection.getSectionNumber(), rightSection);
 
         leftSection.getGridPane().setAlignment(Pos.CENTER);
         middleSection.getGridPane().setAlignment(Pos.CENTER);
@@ -70,6 +78,7 @@ public class Client extends Application {
     public static NetworkConnection getConnection() {
         return networkConnection;
     }
+    public static SectionHandler getSectionHandler() { return sectionHandler; }
     public static void main(String[] args) {
         launch(args);
     }

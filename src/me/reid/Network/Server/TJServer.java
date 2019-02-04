@@ -8,13 +8,14 @@ import java.net.ServerSocket;
 
 public class TJServer {
 
+    private NetworkHandler networkHandler;
     private ServerSocket server;
 
     private ClientConnectListener clientConnectListener;
 
     public TJServer(int port) {
         createServer(port);
-
+        this.networkHandler = new NetworkHandler();
         startConnectListener();
     }
 
@@ -37,6 +38,10 @@ public class TJServer {
 
     public ServerSocket getServerConn() {
         return server;
+    }
+
+    public NetworkHandler getNetworkHandler() {
+        return networkHandler;
     }
 
     public static void main(String[] args) {

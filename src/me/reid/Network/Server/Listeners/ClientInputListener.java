@@ -50,6 +50,9 @@ public class ClientInputListener extends Thread {
         // RUN DB INPUT TODO
         NetworkSeat seat = (NetworkSeat) request.getData();
         System.out.println(seat.getX() + " " + seat.getY() + " " + seat.getSeatHolder());
+        // TODO verify the input
+        TJRequest seatPacket = new TJRequest(TJRequest.RequestType.SEAT_CHANGE_EVENT, seat);
+        server.getNetworkHandler().sendPacketToAll(seatPacket);
     }
 
 }

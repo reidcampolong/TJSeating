@@ -33,6 +33,7 @@ public class ClientConnectListener extends Thread {
                 socket = server.getServerConn().accept();
                 NetworkConnection userConnection = new NetworkConnection(socket);
                 userConnection.startListener(new ClientInputListener(server, userConnection));
+                server.getNetworkHandler().addConnection(userConnection);
                 /*PlaceRequest loginRequest = userConnection.getInput();
                 if (placeServer.getNetworkServer().handleLoginRequest(userConnection, loginRequest)) {
                     placeServer.writeToFile(userConnection.getSocket().toString() + " connected");

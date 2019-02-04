@@ -18,6 +18,10 @@ import java.util.Optional;
  */
 public class SeatHandler {
 
+    public static Seat getFromNetworkSeat(NetworkSeat seat) {
+        return Client.getSectionHandler().getSection(seat.getSectionNumber()).getSeatAtIndex(seat.getY(), seat.getX());
+    }
+
     /**
      * Updates the seat's holder and status
      *

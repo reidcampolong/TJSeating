@@ -11,7 +11,7 @@ import me.reid.Network.Server.TJServer;
 public class ClientInputListener extends Thread {
 
     /**
-     * The place game server
+     * TJ's main server
      **/
     private TJServer server;
 

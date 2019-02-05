@@ -2,6 +2,9 @@ package me.reid.Section.Admin;
 
 import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
+import me.reid.Section.Admin.Buttons.AdminButton;
+import me.reid.Section.Admin.Buttons.GroupButton;
+import me.reid.Section.Admin.Buttons.OccupyButton;
 
 /**
  * Contains buttons used only by admins

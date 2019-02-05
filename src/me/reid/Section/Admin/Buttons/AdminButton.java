@@ -1,4 +1,4 @@
-package me.reid.Section.Admin;
+package me.reid.Section.Admin.Buttons;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

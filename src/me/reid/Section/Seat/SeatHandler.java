@@ -10,7 +10,6 @@ import me.reid.Network.Packet.TJRequest;
 import me.reid.Section.Admin.GroupClickHandler;
 import me.reid.Utilities.StringUtils;
 
-import java.util.List;
 import java.util.Optional;
 
 /**

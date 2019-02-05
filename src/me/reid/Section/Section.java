@@ -1,11 +1,9 @@
 package me.reid.Section;
 
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import me.reid.Section.Seat.Seat;
 import me.reid.Section.Seat.Status;
-import me.reid.Utilities.SeatTranslator;
 
 /**
  * A section is a collection of seats with a set row and column count

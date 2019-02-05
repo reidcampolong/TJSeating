@@ -16,7 +16,6 @@ public class SeatClickListener implements EventHandler<ActionEvent> {
         this.seat = seat;
     }
 
-    @Override
     public void handle(ActionEvent event) {
         SeatHandler.handleInputForSeat(seat);
     }

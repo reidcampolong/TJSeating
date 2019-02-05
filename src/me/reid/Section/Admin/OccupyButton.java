@@ -1,9 +1,7 @@
 package me.reid.Section.Admin;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import me.reid.Section.Seat.Status;
 
 /**
  * Created by Reid on 1/24/19.

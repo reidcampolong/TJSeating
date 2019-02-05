@@ -3,6 +3,9 @@ package me.reid.Network.Packet;
 
 import java.io.Serializable;
 
+/**
+ * A serializable seat that is sent over the network
+ */
 public class NetworkSeat implements Serializable {
 
     private int sectionNumber;

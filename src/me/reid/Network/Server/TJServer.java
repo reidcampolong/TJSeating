@@ -2,10 +2,14 @@ package me.reid.Network.Server;
 
 
 import me.reid.Network.Server.Listeners.ClientConnectListener;
+import me.reid.Utilities.Log;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 
+/**
+ * The Server Application Class
+ */
 public class TJServer {
 
     private NetworkHandler networkHandler;
@@ -15,8 +19,10 @@ public class TJServer {
 
     public TJServer(int port) {
         createServer(port);
+        Log.i("Server started.");
         this.networkHandler = new NetworkHandler();
         startConnectListener();
+        Log.i("Listening for new connections.");
     }
 
 

@@ -1,32 +1,36 @@
 package me.reid.Section.Admin;
 
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import me.reid.Section.Admin.Buttons.AdminButton;
+import me.reid.Section.Admin.Buttons.GroupButton;
+import me.reid.Section.Admin.Buttons.OccupyButton;
 
 /**
  * Contains buttons used only by admins
  */
 public class AdminSection {
 
-    private GridPane gridPane;
+    private HBox hBox;
 
     private AdminButton groupButton;
     private GroupClickHandler groupClickHandler;
     private AdminButton occupyButton;
 
     public AdminSection() {
-        gridPane = new GridPane();
-        gridPane.setPadding(new Insets(2, 10, 2, 10));
+        hBox = new HBox(5);
+        hBox.setPadding(new Insets(2, 10, 2, 10));
 
-        groupButton = new GroupButton("Group Select");
+        groupButton = new GroupButton("Group");
         groupClickHandler = new GroupClickHandler((GroupButton) groupButton);
         occupyButton = new OccupyButton("Occupy");
 
-        gridPane.getChildren().addAll(groupButton.getPhysicalButton(), occupyButton.getPhysicalButton());
+        hBox.getChildren().add(groupButton.getPhysicalButton());
+        hBox.getChildren().add(occupyButton.getPhysicalButton());
+        //gridPane.getChildren().addAll(groupButton.getPhysicalButton(), occupyButton.getPhysicalButton());
     }
 
-    public GridPane getGridPane() {
-        return gridPane;
+    public HBox getGridPane() {
+        return hBox;
     }
 }

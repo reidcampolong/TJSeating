@@ -5,10 +5,13 @@ import me.reid.Network.Packet.NetworkSeat;
 import me.reid.Network.Packet.TJRequest;
 import me.reid.Network.Server.TJServer;
 
+/**
+ * Thread that listens for input from client connection
+ */
 public class ClientInputListener extends Thread {
 
     /**
-     * The place game server
+     * TJ's main server
      **/
     private TJServer server;
 

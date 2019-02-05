@@ -1,12 +1,10 @@
-package me.reid.Section.Admin;
+package me.reid.Section.Admin.Buttons;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import me.reid.Section.Admin.GroupClickHandler;
 
 public class GroupButton extends AdminButton {
-
-    private String colorString = "ffd700";
-    private Button physicalButton;
 
     public GroupButton(String buttonTitle) {
         super(buttonTitle);

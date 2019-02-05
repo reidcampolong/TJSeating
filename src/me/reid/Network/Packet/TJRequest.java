@@ -2,6 +2,10 @@ package me.reid.Network.Packet;
 
 import java.io.Serializable;
 
+/**
+ * A packet that is sent between clients and the server
+ * @param <E>
+ */
 public class TJRequest<E extends Serializable> implements Serializable {
     public enum RequestType {
         /** Request a single seat to be changed **/

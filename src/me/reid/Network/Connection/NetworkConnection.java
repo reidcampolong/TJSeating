@@ -41,6 +41,7 @@ public class NetworkConnection {
      */
     public NetworkConnection(Socket socket) {
         try {
+            // TODO verify that connection is still valid
             this.socket = socket;
             this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             this.objectInputStream = new ObjectInputStream(socket.getInputStream());
@@ -101,7 +102,7 @@ public class NetworkConnection {
             if (inputThread != null)
                 this.inputThread.join();
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Reid on 2/4/19.
+ * Handles network connections
  */
 public class NetworkHandler {
 

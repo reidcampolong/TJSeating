@@ -6,6 +6,9 @@ import me.reid.Network.Packet.TJRequest;
 import me.reid.Section.Seat.SeatHandler;
 import me.reid.Section.Seat.Status;
 
+/**
+ * Thread that listens to input from the server
+ */
 public class ServerInputListener extends Thread {
 
     /**

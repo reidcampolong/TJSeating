@@ -6,6 +6,9 @@ import me.reid.Network.Server.TJServer;
 import java.io.IOException;
 import java.net.Socket;
 
+/**
+ * Thread that listens for new connections from clients
+ */
 public class ClientConnectListener extends Thread {
 
     /**

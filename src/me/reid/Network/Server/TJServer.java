@@ -6,6 +6,9 @@ import me.reid.Network.Server.Listeners.ClientConnectListener;
 import java.io.IOException;
 import java.net.ServerSocket;
 
+/**
+ * The Server Application Class
+ */
 public class TJServer {
 
     private NetworkHandler networkHandler;

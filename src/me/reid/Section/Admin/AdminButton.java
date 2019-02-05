@@ -5,7 +5,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 
 /**
- * Created by Reid on 1/24/19.
+ * An admin button that changes color when toggled
  */
 public abstract class AdminButton implements EventHandler<ActionEvent> {
 
@@ -20,6 +20,10 @@ public abstract class AdminButton implements EventHandler<ActionEvent> {
 
     private void initButton(String buttonTitle) {
         this.physicalButton = new Button(buttonTitle);
+        this.physicalButton.setMinWidth(100);
+        this.physicalButton.setMaxWidth(100);
+        this.physicalButton.setMaxHeight(30);
+        this.physicalButton.setMinHeight(30);
         this.physicalButton.setOnAction(this);
         updateStyle();
     }

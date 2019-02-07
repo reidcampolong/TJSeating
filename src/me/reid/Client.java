@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import me.reid.Database.Database;
 import me.reid.Network.Connection.NetworkConnection;
 import me.reid.Network.ServerInputListener;
 import me.reid.Section.Admin.AdminSection;
@@ -30,7 +31,9 @@ public class Client extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         // Connect to the server
-        initializeConnection();
+        // initializeConnection();
+
+        new Database();
 
         primaryStage.setTitle("TJ Seating by Reid Campolong v" + VERSION);
 
@@ -61,6 +64,7 @@ public class Client extends Application {
         Scene scene = new Scene(verticalContainer, 1300, 850);
         primaryStage.setScene(scene);
         primaryStage.show();
+
     }
 
     public void initializeConnection() {

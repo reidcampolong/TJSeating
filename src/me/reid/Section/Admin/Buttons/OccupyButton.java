@@ -2,6 +2,8 @@ package me.reid.Section.Admin.Buttons;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import me.reid.Client;
+import me.reid.Database.Database;
 
 /**
  * Created by Reid on 1/24/19.
@@ -19,6 +21,7 @@ public class OccupyButton extends AdminButton {
         else
             setSelected(true);
         updateStyle();
+        Client.getDatabase().saveDayToDoc(Database.currentDay);
     }
 
 

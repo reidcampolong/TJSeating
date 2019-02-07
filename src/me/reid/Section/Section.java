@@ -4,17 +4,22 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import me.reid.Section.Seat.Seat;
 import me.reid.Section.Seat.Status;
+import me.reid.Utilities.SeatTranslator;
+
+import java.util.HashMap;
 
 /**
  * A section is a collection of seats with a set row and column count
  */
 public class Section {
 
+    private HashMap<String, Seat> seatNameMap;
     private int sectionNumber;
     private GridPane gridPane;
     private Seat[][] seats;
 
     public Section(int sectionNumber, int cols, int rows) {
+        this.seatNameMap = new HashMap();
         this.sectionNumber = sectionNumber;
         gridPane = new GridPane();
         gridPane.setPadding(new Insets(2, 10, 5, 10));
@@ -33,6 +38,7 @@ public class Section {
 
                 // Create seat
                 Seat seat = new Seat(sectionNumber, col, row,"None", Status.AVAILABLE);
+                seatNameMap.put(SeatTranslator.getName(col, row), seat);
                 seats[col][row] = seat;
 
                 // Add to screen
@@ -42,6 +48,11 @@ public class Section {
         }
     }
 
+    public Seat getSeatByName(String seatName) {
+        return seatNameMap.get(seatName);
+    }
+
+    public Seat[][] getAllSeats() { return seats; }
     public Seat getSeatAtIndex(int x, int y) {
         return seats[x][y];
     }

@@ -45,6 +45,7 @@ public abstract class AdminButton implements EventHandler<ActionEvent> {
 
     public void setSelected(boolean value) {
         this.selected = value;
+        updateStyle();
     }
 
 

@@ -26,14 +26,13 @@ public class Client extends Application {
 
     private static NetworkConnection networkConnection;
     private static SectionHandler sectionHandler;
+    private static Database database;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
         // Connect to the server
         // initializeConnection();
-
-        new Database();
 
         primaryStage.setTitle("TJ Seating by Reid Campolong v" + VERSION);
 
@@ -49,6 +48,8 @@ public class Client extends Application {
         leftSection.getGridPane().setAlignment(Pos.CENTER);
         middleSection.getGridPane().setAlignment(Pos.CENTER);
         rightSection.getGridPane().setAlignment(Pos.CENTER);
+
+        database = new Database(this);
 
         HBox horozontalContainer = new HBox();
         horozontalContainer.getChildren().addAll(leftSection.getGridPane(), middleSection.getGridPane(), rightSection.getGridPane());
@@ -83,6 +84,9 @@ public class Client extends Application {
         return networkConnection;
     }
     public static SectionHandler getSectionHandler() { return sectionHandler; }
+    public static Database getDatabase() {
+        return database;
+    }
     public static void main(String[] args) {
         launch(args);
     }

@@ -138,9 +138,12 @@ public class SeatHandler {
 
     private static void attemptPurchase(Seat seat, Status newStatus, String holder) {
         System.out.println("Writing out...");
-        NetworkSeat ns = new NetworkSeat(seat.getSectionNumber(), newStatus.toString(), holder, seat.getX(), seat.getY());
+        seat.changeStatus(newStatus);
+        seat.changeSeatHolder(holder);
+        /*NetworkSeat ns = new NetworkSeat(seat.getSectionNumber(), newStatus.toString(), holder, seat.getX(), seat.getY());
         TJRequest toSend = new TJRequest(TJRequest.RequestType.PURCHASE_SEAT_REQUEST, ns);
         System.out.println(toSend);
-        Client.getConnection().writeOut(toSend);
+        Client.getConnection().writeOut(toSend);*/
+        Client.getDatabase().writeSeatToDoc(seat);
     }
 }

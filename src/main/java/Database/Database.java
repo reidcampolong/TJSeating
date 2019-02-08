@@ -4,6 +4,7 @@ import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.*;
 import com.google.firebase.database.*;
 import main.java.Client;
+import main.java.Section.Admin.GroupClickHandler;
 import main.java.Section.Seat.Seat;
 import main.java.Section.Seat.SeatHandler;
 import main.java.Section.Seat.Status;
@@ -14,6 +15,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.acl.Group;
 import java.util.*;
 
 /**
@@ -69,6 +71,7 @@ public class Database {
 
     public void switchViewTo(String dayName) {
         currentDay = dayName;
+        GroupClickHandler.i().removeAll();
         registerDayListener(db, currentDay);
     }
 
@@ -79,6 +82,7 @@ public class Database {
      * @param document
      */
     private void updateSeatByDoc(Section section, QueryDocumentSnapshot document) {
+        Log.i("Updating seat to " + document.getData().get("status").toString());
         Seat seat = section.getSeatByName(document.getId());
         Status status = Status.valueOf(document.getData().get("status").toString());
         String holder = document.getData().get("holder").toString();
@@ -89,18 +93,18 @@ public class Database {
         updateSeatByDoc(section, dc.getDocument());
     }
 
-    public void writeSeatToDoc(String dayname, Seat seat) {
+    public void writeSeatToDoc(String dayname, Seat seat, String status, String holder) {
         Map<String, Object> docData = new HashMap<>();
-        docData.put("holder", seat.getSeatHolder());
-        docData.put("status", seat.getSeatStatus().toString());
+        docData.put("holder", holder);
+        docData.put("status", status);
 
         db.collection("days").document(currentDay)
                 .collection(String.valueOf(seat.getSectionNumber())).document(seat.getSectionTitle()).set(docData);
         System.out.println("Wrote seat to document.");
     }
 
-    public void writeSeatToDoc(Seat seat) {
-        writeSeatToDoc(currentDay, seat);
+    public void writeSeatToDoc(Seat seat, String status, String holder) {
+        writeSeatToDoc(currentDay, seat, status, holder);
     }
 
     /**
@@ -113,7 +117,7 @@ public class Database {
         Seat[][] seats = section.getAllSeats();
         for (int col = 0; col < seats.length; col++) {
             for (int row = 0; row < seats[col].length; row++) {
-                writeSeatToDoc(dayname, seats[col][row]);
+                writeSeatToDoc(dayname, seats[col][row], seats[col][row].getSeatStatus().toString(), seats[col][row].getSeatHolder());
             }
         }
     }
@@ -158,6 +162,7 @@ public class Database {
     private void createListenerFor(String dayName, final Section section) {
         CollectionReference collectionReference = db.collection("days").document(dayName).collection(String.valueOf(section.getSectionNumber()));
         ListenerRegistration listener = collectionReference.addSnapshotListener((snapshot, e) -> {
+            System.out.println("snapshot: " + snapshot.toString());
             if (snapshot != null) {
                 for (DocumentChange d : snapshot.getDocumentChanges())
                     updateSeatByDoc(section, d);

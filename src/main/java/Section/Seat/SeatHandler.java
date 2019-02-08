@@ -9,6 +9,7 @@ import main.java.Network.Packet.NetworkSeat;
 import main.java.Section.Admin.GroupClickHandler;
 import main.java.Utilities.StringUtils;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -96,6 +97,42 @@ public class SeatHandler {
         alert.showAndWait();
     }
 
+    public static void handleInputForGroupSelect(List<Seat> seatList) {
+        String headerText = "Modifying " + seatList.size() + " seats";
+
+        for(Seat s : seatList)
+            if(s.getSeatStatus() != Status.AVAILABLE) {
+                headerText += "\nNot all seats are GREEN! Careful!";
+                break;
+            }
+
+        String defaultStatus = "Occupied";
+        Optional<Pair<String, String>> result = createPopupAndGetFeedback("Seat Editor", headerText, defaultStatus, "");
+        if (result.isPresent()) {
+
+            // Update seat status
+            Status newStatus = Status.valueOf(result.get().getKey().toUpperCase());
+
+            String holder;
+            if (newStatus == Status.OCCUPIED) {
+                holder = result.get().getValue();
+                if (holder.trim().equals("")) {
+                    createBadPopup("Seat Editor", "You must enter a customers name!");
+                    handleInputForGroupSelect(seatList);
+                    return;
+                }
+            } else {
+                holder = "None";
+            }
+
+            for(Seat s : seatList) {
+                attemptPurchase(s, newStatus, holder);
+            }
+
+            seatList.clear();
+        }
+    }
+
     /**
      * Creates a popup and allows for the changing of a seat's status
      *
@@ -120,29 +157,28 @@ public class SeatHandler {
             // Update seat status
             Status newStatus = Status.valueOf(result.get().getKey().toUpperCase());
 
+            String holder;
             if (newStatus == Status.OCCUPIED) {
-                String holder = result.get().getValue();
+                holder = result.get().getValue();
                 if (holder.trim().equals("")) {
                     createBadPopup("Seat Editor", "You must enter a customers name!");
                     handleInputForSeat(seat);
                     return;
-                } else {
-                    attemptPurchase(seat, newStatus, holder);
-                    //updateSeat(seat, newStatus, holder);
                 }
-            } //else
-                //updateSeat(seat, newStatus, "None");
+            } else {
+                holder = "None";
+            }
+
+            attemptPurchase(seat, newStatus, holder);
         }
     }
 
     private static void attemptPurchase(Seat seat, Status newStatus, String holder) {
         System.out.println("Writing out...");
-        seat.changeStatus(newStatus);
-        seat.changeSeatHolder(holder);
         /*NetworkSeat ns = new NetworkSeat(seat.getSectionNumber(), newStatus.toString(), holder, seat.getX(), seat.getY());
         TJRequest toSend = new TJRequest(TJRequest.RequestType.PURCHASE_SEAT_REQUEST, ns);
         System.out.println(toSend);
         Client.getConnection().writeOut(toSend);*/
-        Client.getDatabase().writeSeatToDoc(seat);
+        Client.getDatabase().writeSeatToDoc(seat, newStatus.toString(), holder);
     }
 }

@@ -23,25 +23,26 @@ public class Seat {
 
     /**
      * Constructs a new seat
-     * @param section
-     * @param y - column in section
-     * @param x - row in row
+     *
+     * @param y          - column in section
+     * @param x          - row in row
      * @param seatHolder
      * @param seatStatus
      */
-    public Seat(int sectionNumber, int y, int x, String seatHolder, Status seatStatus) {
+    public Seat(int sectionNumber, String name, int y, int x, String seatHolder, Status seatStatus) {
         this.sectionNumber = sectionNumber;
         this.x = x;
         this.y = y;
         this.seatHolder = seatHolder;
         this.seatStatus = seatStatus;
-        this.sectionTitle = SeatTranslator.getName(y, x);
+        this.sectionTitle = name;
 
         createButton();
     }
 
     /**
      * Changes the seat status and updates the style
+     *
      * @param newStatus
      */
     public void changeStatus(Status newStatus) {
@@ -49,8 +50,17 @@ public class Seat {
         updateSeatStyle();
     }
 
+    public void updateSelected(boolean selected) {
+        if (selected) {
+            clientButton.setStyle("-fx-font-weight: bold; -fx-font-size: 13; -fx-background-color: #1639ff; -fx-border-color: #000000; -fx-border-width: 1px;");
+        } else {
+            updateSeatStyle();
+        }
+    }
+
     /**
      * Changes the seat holder
+     *
      * @param newHolder
      */
     public void changeSeatHolder(String newHolder) {
@@ -62,7 +72,8 @@ public class Seat {
      */
     private void updateSeatStyle() {
         String colorString = "";
-        switch(seatStatus) {
+        clientButton.setText(getSectionTitle());
+        switch (seatStatus) {
             case AVAILABLE:
                 colorString = "00ff00";
                 break;
@@ -71,12 +82,14 @@ public class Seat {
                 break;
             case BLACK:
                 colorString = "6d6d6d";
+                clientButton.setText("TJ");
                 break;
             case HANDICAP:
                 colorString = "0085FF";
+                clientButton.setText("HR");
                 break;
         }
-        clientButton.setStyle("-fx-font-weight: bold; -fx-font-size: 13; -fx-background-color: #"+colorString+"; -fx-border-color: #000000; -fx-border-width: 1px;");
+        clientButton.setStyle("-fx-font-weight: bold; -fx-font-size: 13; -fx-background-color: #" + colorString + "; -fx-border-color: #000000; -fx-border-width: 1px;");
     }
 
     /**
@@ -84,9 +97,9 @@ public class Seat {
      */
     private void createButton() {
 
-        clientButton = new Button(SeatTranslator.getName(y, x));
-        clientButton.setPrefWidth(50);
-        clientButton.setPrefHeight(6);
+        clientButton = new Button(getSectionTitle());
+        clientButton.setPrefWidth(55);
+        clientButton.setPrefHeight(5);
 
         updateSeatStyle();
 

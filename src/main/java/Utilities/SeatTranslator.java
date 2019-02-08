@@ -11,7 +11,10 @@ public class SeatTranslator {
         return null;
     }
 
-    public static String getName(int col, int row) {
-        return ((char) (90-col))+ "" + row;
+    public static String getName(int maxCols, int y, int x) {
+        return seatAlphabet[(maxCols - y - 1)] + (x + 1);
     }
+
+
+    public static String[] seatAlphabet = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "AA", "BB", "CC", "DD", "EE"};
 }

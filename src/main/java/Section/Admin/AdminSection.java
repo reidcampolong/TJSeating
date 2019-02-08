@@ -17,38 +17,35 @@ public class AdminSection {
 
     private HBox hBox;
 
-    private AdminButton groupButton;
-
     private List<DayButton> dayButtons;
-    private DayButton thursdayButton;
-    private DayButton fridayButton;
-    private DayButton satMatButton;
-    private DayButton satNightButton;
+    private GroupClickHandler groupClickHandler;
 
     public AdminSection() {
 
-        dayButtons = new ArrayList<>(4);
         hBox = new HBox(5);
         hBox.setPadding(new Insets(2, 10, 2, 10));
+        dayButtons = new ArrayList<>(4);
 
-        groupButton = new GroupButton("Group");
-        new GroupClickHandler((GroupButton) groupButton);
+        GroupButton groupButton = new GroupButton("Group");
+        initializeGroupClickHandler(groupButton);
 
         AdminButton saveButton = new OccupyButton("Save ALL");
-        thursdayButton = new DayButton("thursday", dayButtons);
-        dayButtons.add(thursdayButton);
-        fridayButton = new DayButton("friday", dayButtons);
-        dayButtons.add(fridayButton);
-        satMatButton = new DayButton("satmat", dayButtons);
-        dayButtons.add(satMatButton);
-        satNightButton = new DayButton("satnight", dayButtons);
-        dayButtons.add(satNightButton);
+        dayButtons.add(new DayButton("thursday", dayButtons));
+        dayButtons.add(new DayButton("friday", dayButtons));
+        dayButtons.add(new DayButton("satmat", dayButtons));
+        dayButtons.add(new DayButton("satnight", dayButtons));
 
         hBox.getChildren().add(saveButton.getPhysicalButton());
         hBox.getChildren().add(groupButton.getPhysicalButton());
         for(DayButton b : dayButtons)
             hBox.getChildren().add(b.getPhysicalButton());
-        //gridPane.getChildren().addAll(groupButton.getPhysicalButton(), occupyButton.getPhysicalButton());
+
+        // Enable thursday data by default
+        dayButtons.get(0).setSelected(true);
+    }
+
+    private void initializeGroupClickHandler(GroupButton button) {
+        groupClickHandler = new GroupClickHandler(button);
     }
 
     public HBox getGridPane() {

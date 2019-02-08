@@ -2,8 +2,10 @@ package main.java.Section.Admin;
 
 import main.java.Section.Admin.Buttons.GroupButton;
 import main.java.Section.Seat.Seat;
+import main.java.Section.Seat.SeatHandler;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -27,15 +29,19 @@ public class GroupClickHandler {
      * Turns group select on/off
      */
     public void toggleGroupSelect(boolean toggleOn) {
-        if(toggleOn) {
+        if (toggleOn) {
             groupSeatList.clear();
         } else {
-            //SeatHandler.
+            if (groupSeatList.size() > 0)
+                SeatHandler.handleInputForGroupSelect(groupSeatList);
+            removeAll();
+            groupButton.setSelected(false);
         }
     }
 
     /**
      * Checks status of group select
+     *
      * @return
      */
     public boolean isGroupSelectEnabled() {
@@ -44,15 +50,29 @@ public class GroupClickHandler {
 
     /**
      * Adds a seat to group select
+     *
      * @param seat
      */
     public void addToList(Seat seat) {
-        if(!groupSeatList.contains(seat))
+        if (!groupSeatList.contains(seat)) {
+            seat.updateSelected(true);
             groupSeatList.add(seat);
+        }
     }
 
     public void remFromList(Seat seat) {
-        groupSeatList.remove(seat);
+        if (groupSeatList.contains(seat)) {
+            seat.updateSelected(false);
+            groupSeatList.remove(seat);
+        }
+    }
+
+    public void removeAll() {
+        Iterator<Seat> it = groupSeatList.iterator();
+        while(it.hasNext()) {
+            it.next().updateSelected(false);
+            it.remove();
+        }
     }
 
     public List<Seat> getGroupSeatList() {

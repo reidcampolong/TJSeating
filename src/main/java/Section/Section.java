@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import main.java.Section.Seat.Seat;
 import main.java.Section.Seat.Status;
+import main.java.Utilities.Log;
 import main.java.Utilities.SeatTranslator;
 
 import java.util.HashMap;
@@ -33,17 +34,16 @@ public class Section {
      */
     private void initPane(int cols, int rows) {
         seats = new Seat[cols][rows];
-        for (int col = 0; col < seats.length; col++) {
-            for (int row = 0; row < seats[col].length; row++) {
+        for(int col = 0; col < cols; col++) {
+            for(int row = 0; row < seats[col].length; row++) {
 
                 // Create seat
-                Seat seat = new Seat(sectionNumber, col, row,"None", Status.AVAILABLE);
-                seatNameMap.put(SeatTranslator.getName(col, row), seat);
+                Seat seat = new Seat(sectionNumber, SeatTranslator.getName(cols, col, row), col, row,"None", Status.AVAILABLE);
+                seatNameMap.put(seat.getSectionTitle(), seat);
                 seats[col][row] = seat;
 
                 // Add to screen
                 gridPane.getChildren().add(seat.getClientButton());
-
             }
         }
     }

@@ -31,9 +31,9 @@ public class Client extends Application {
         primaryStage.setTitle("TJ Seating by Reid Campolong v" + VERSION);
 
         sectionHandler = new SectionHandler();
-        Section leftSection = new Section(0, 31, 7);
-        Section middleSection = new Section(1,29, 14);
-        Section rightSection = new Section(2,31, 7);
+        /*Section leftSection = new Section(SectionHandler.sectionAValues[0], SectionHandler.sectionAValues[1], SectionHandler.sectionAValues[2]);
+        Section middleSection = new Section(SectionHandler.sectionBValues[0], SectionHandler.sectionBValues[1], SectionHandler.sectionBValues[2]);
+        Section rightSection = new Section(SectionHandler.sectionCValues[0], SectionHandler.sectionCValues[1], SectionHandler.sectionCValues[2]);
 
         sectionHandler.addSection(leftSection.getSectionNumber(), leftSection);
         sectionHandler.addSection(middleSection.getSectionNumber(), middleSection);
@@ -41,25 +41,22 @@ public class Client extends Application {
 
         leftSection.getGridPane().setAlignment(Pos.CENTER);
         middleSection.getGridPane().setAlignment(Pos.CENTER);
-        rightSection.getGridPane().setAlignment(Pos.CENTER);
-
-        HBox horozontalContainer = new HBox();
-        horozontalContainer.getChildren().addAll(leftSection.getGridPane(), middleSection.getGridPane(), rightSection.getGridPane());
-        horozontalContainer.setAlignment(Pos.CENTER);
+        rightSection.getGridPane().setAlignment(Pos.CENTER);*/
 
         AdminSection adminSection = new AdminSection();
         adminSection.getGridPane().setAlignment(Pos.CENTER);
 
+        initializeDatabase();
+
         VBox verticalContainer = new VBox();
         verticalContainer.setAlignment(Pos.CENTER);
-        verticalContainer.getChildren().addAll(adminSection.getGridPane(), horozontalContainer);
+        verticalContainer.getChildren().addAll(adminSection.getGridPane(), sectionHandler.getHorozontalContainer());
 
         Scene scene = new Scene(verticalContainer, 900, 600);
 
         primaryStage.setScene(scene);
         primaryStage.setMaximized(true);
 
-        initializeDatabase();
         primaryStage.show();
 
     }
@@ -68,7 +65,10 @@ public class Client extends Application {
         database = new Database(this);
     }
 
-    public static SectionHandler getSectionHandler() { return sectionHandler; }
+    public static SectionHandler getSectionHandler() {
+        return sectionHandler;
+    }
+
     public static Database getDatabase() {
         return database;
     }

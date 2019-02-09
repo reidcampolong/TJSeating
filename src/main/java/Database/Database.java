@@ -2,8 +2,9 @@ package main.java.Database;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.*;
-import com.google.firebase.database.*;
 import main.java.Client;
+import main.java.Database.Days.Day;
+import main.java.Database.Days.DayHandler;
 import main.java.Section.Admin.GroupClickHandler;
 import main.java.Section.Seat.Seat;
 import main.java.Section.Seat.SeatHandler;
@@ -11,11 +12,9 @@ import main.java.Section.Seat.Status;
 import main.java.Section.Section;
 import main.java.Utilities.Log;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.security.acl.Group;
 import java.util.*;
 
 /**
@@ -23,23 +22,13 @@ import java.util.*;
  */
 public class Database {
 
-    public static String currentDay = "thursday";
-    private String collectionDatapath = "days.{day}.{section}";
-
-    public enum Table {
-        THURSDAY, FRIDAY, SATMAT, SATNIGHT;
-    }
+    private DayHandler dayHandler;
 
     private Client client;
-    private FirebaseDatabase database;
     private Firestore db;
-    private DatabaseReference ref;
-
-    private List<ListenerRegistration> currentListeners;
 
     public Database(Client client) {
         this.client = client;
-        this.currentListeners = new ArrayList<>();
         initializeConnection();
     }
 
@@ -61,18 +50,18 @@ public class Database {
         db = options.getService();
 
         //createCollectionListener(db, "days", "thursday", "0");
+        this.dayHandler = new DayHandler(db);
         System.out.println("Try to grab data:");
         try {
-            switchViewTo(currentDay);
+            switchViewTo("thursday");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void switchViewTo(String dayName) {
-        currentDay = dayName;
         GroupClickHandler.i().removeAll();
-        registerDayListener(db, currentDay);
+        dayHandler.changeDayTo(dayName);
     }
 
     /**
@@ -98,13 +87,13 @@ public class Database {
         docData.put("holder", holder);
         docData.put("status", status);
 
-        db.collection("days").document(currentDay)
+        db.collection("days").document(dayname)
                 .collection(String.valueOf(seat.getSectionNumber())).document(seat.getSectionTitle()).set(docData);
         System.out.println("Wrote seat to document.");
     }
 
     public void writeSeatToDoc(Seat seat, String status, String holder) {
-        writeSeatToDoc(currentDay, seat, status, holder);
+        writeSeatToDoc(dayHandler.getCurrentDay().getDatabaseName(), seat, status, holder);
     }
 
     /**
@@ -141,7 +130,7 @@ public class Database {
      *
      * @param db
      */
-    private void registerDayListener(Firestore db, String dayName) {
+    /*private void registerDayListener(Firestore db, String dayName) {
         if (currentListeners.size() > 0)
             removeOldListeners();
         createListenerFor(dayName, Client.getSectionHandler().getSection(0));
@@ -169,5 +158,5 @@ public class Database {
             }
         });
         currentListeners.add(listener);
-    }
+    }*/
 }

@@ -35,7 +35,6 @@ public class GroupClickHandler {
             if (groupSeatList.size() > 0)
                 SeatHandler.handleInputForGroupSelect(groupSeatList);
             removeAll();
-            groupButton.setSelected(false);
         }
     }
 
@@ -60,6 +59,10 @@ public class GroupClickHandler {
         }
     }
 
+    public boolean isInList(Seat seat) {
+        return groupSeatList.contains(seat);
+    }
+
     public void remFromList(Seat seat) {
         if (groupSeatList.contains(seat)) {
             seat.updateSelected(false);
@@ -73,10 +76,7 @@ public class GroupClickHandler {
             it.next().updateSelected(false);
             it.remove();
         }
-    }
-
-    public List<Seat> getGroupSeatList() {
-        return groupSeatList;
+        groupButton.setSelected(false);
     }
 
     public static GroupClickHandler i() {

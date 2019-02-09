@@ -70,7 +70,7 @@ public class Seat {
     /**
      * Visually updates a seat's style
      */
-    private void updateSeatStyle() {
+    public void updateSeatStyle() {
         String colorString = "";
         clientButton.setText(getSectionTitle());
         switch (seatStatus) {

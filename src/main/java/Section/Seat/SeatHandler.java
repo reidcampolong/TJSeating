@@ -1,5 +1,6 @@
 package main.java.Section.Seat;
 
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -29,8 +30,10 @@ public class SeatHandler {
      * @param holder
      */
     public static void updateSeat(Seat seat, Status newStatus, String holder) {
-        seat.changeStatus(newStatus);
-        seat.changeSeatHolder(holder);
+        Platform.runLater(() -> {
+            seat.changeStatus(newStatus);
+            seat.changeSeatHolder(holder);
+        });
     }
 
     /**
@@ -100,8 +103,8 @@ public class SeatHandler {
     public static void handleInputForGroupSelect(List<Seat> seatList) {
         String headerText = "Modifying " + seatList.size() + " seats";
 
-        for(Seat s : seatList)
-            if(s.getSeatStatus() != Status.AVAILABLE) {
+        for (Seat s : seatList)
+            if (s.getSeatStatus() != Status.AVAILABLE) {
                 headerText += "\nNot all seats are GREEN! Careful!";
                 break;
             }
@@ -125,7 +128,7 @@ public class SeatHandler {
                 holder = "None";
             }
 
-            for(Seat s : seatList) {
+            for (Seat s : seatList) {
                 attemptPurchase(s, newStatus, holder);
             }
 
@@ -140,7 +143,11 @@ public class SeatHandler {
      */
     public static void handleInputForSeat(Seat seat) {
         if (GroupClickHandler.i().isGroupSelectEnabled()) {
-            GroupClickHandler.i().addToList(seat);
+            if(!GroupClickHandler.i().isInList(seat)) {
+                GroupClickHandler.i().addToList(seat);
+            } else {
+                GroupClickHandler.i().remFromList(seat);
+            }
             return;
         }
 

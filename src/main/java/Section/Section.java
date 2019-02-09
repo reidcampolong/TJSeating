@@ -1,6 +1,7 @@
 package main.java.Section;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
 import main.java.Section.Seat.Seat;
 import main.java.Section.Seat.Status;
@@ -29,16 +30,17 @@ public class Section {
 
     /**
      * Initializes pane with seat buttons
+     *
      * @param cols
      * @param rows
      */
     private void initPane(int cols, int rows) {
         seats = new Seat[cols][rows];
-        for(int col = 0; col < cols; col++) {
-            for(int row = 0; row < seats[col].length; row++) {
+        for (int col = 0; col < cols; col++) {
+            for (int row = 0; row < seats[col].length; row++) {
 
                 // Create seat
-                Seat seat = new Seat(sectionNumber, SeatTranslator.getName(cols, col, row), col, row,"None", Status.AVAILABLE);
+                Seat seat = new Seat(sectionNumber, SeatTranslator.getName(cols, col, row), col, row, "None", Status.AVAILABLE);
                 seatNameMap.put(seat.getSectionTitle(), seat);
                 seats[col][row] = seat;
 
@@ -52,7 +54,10 @@ public class Section {
         return seatNameMap.get(seatName);
     }
 
-    public Seat[][] getAllSeats() { return seats; }
+    public Seat[][] getAllSeats() {
+        return seats;
+    }
+
     public Seat getSeatAtIndex(int x, int y) {
         return seats[x][y];
     }
@@ -60,6 +65,7 @@ public class Section {
     public int getSectionNumber() {
         return sectionNumber;
     }
+
     public GridPane getGridPane() {
         return gridPane;
     }

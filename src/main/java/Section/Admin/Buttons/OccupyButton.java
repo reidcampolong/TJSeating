@@ -20,7 +20,7 @@ public class OccupyButton extends AdminButton {
         else
             setSelected(true);
         updateStyle();
-        Client.getDatabase().saveDayToDoc(Database.currentDay);
+        //Client.getDatabase().saveDayToDoc(Database.currentDay);
     }
 
 

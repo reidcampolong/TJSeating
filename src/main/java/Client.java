@@ -55,7 +55,8 @@ public class Client extends Application {
         Scene scene = new Scene(verticalContainer, 900, 600);
 
         primaryStage.setScene(scene);
-        primaryStage.setMaximized(true);
+        primaryStage.setFullScreen(true);
+        //primaryStage.setMaximized(true);
 
         primaryStage.show();
 

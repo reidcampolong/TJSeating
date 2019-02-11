@@ -23,7 +23,7 @@ public class AdminSection {
     public AdminSection() {
 
         hBox = new HBox(5);
-        hBox.setPadding(new Insets(20, 10, 2, 10));
+        hBox.setPadding(new Insets(2, 10, 2, 10));
         dayButtons = new ArrayList<>(4);
 
         GroupButton groupButton = new GroupButton("Group");

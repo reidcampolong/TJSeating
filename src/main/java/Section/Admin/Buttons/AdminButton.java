@@ -20,17 +20,15 @@ public abstract class AdminButton implements EventHandler<ActionEvent> {
 
     private void initButton(String buttonTitle) {
         this.physicalButton = new Button(buttonTitle);
-        this.physicalButton.setMinWidth(100);
-        this.physicalButton.setMaxWidth(100);
-        this.physicalButton.setMaxHeight(30);
-        this.physicalButton.setMinHeight(30);
+        physicalButton.setPrefWidth(80);
+        physicalButton.setPrefHeight(10);
         this.physicalButton.setOnAction(this);
         updateStyle();
     }
 
     public void updateStyle() {
         String colorString = (selected) ? selectedButtonColor : unselectedButtonColor;
-        this.physicalButton.setStyle("-fx-font-weight: bold; -fx-font-size: 13; -fx-background-color: #" + colorString + ";");
+        this.physicalButton.setStyle("-fx-font-weight: bold; -fx-font-size: 11; -fx-background-color: #" + colorString + ";");
     }
 
     public Button getPhysicalButton() {

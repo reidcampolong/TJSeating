@@ -1,5 +1,6 @@
 package main.java.Section;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 
@@ -19,6 +20,7 @@ public class SectionHandler {
     public SectionHandler() {
         horozontalContainer = new HBox();
         horozontalContainer.setAlignment(Pos.CENTER);
+        horozontalContainer.setPadding(new Insets(2, 0, 10, 0));
         sectionMap = new HashMap<>();
     }
 

@@ -3,6 +3,7 @@ package main.java.Section;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import main.java.Section.Seat.Seat;
 import main.java.Section.Seat.Status;
 import main.java.Utilities.Log;

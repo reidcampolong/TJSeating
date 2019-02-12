@@ -52,7 +52,7 @@ public class Seat {
 
     public void updateSelected(boolean selected) {
         if (selected) {
-            clientButton.setStyle("-fx-font-weight: bold; -fx-font-size: 13; -fx-background-color: #1639ff; -fx-border-color: #000000; -fx-border-width: 1px;");
+            clientButton.setStyle("-fx-font-weight: bold; -fx-font-size: 0; -fx-background-color: #1639ff; -fx-border-color: #000000; -fx-border-width: 1px;");
         } else {
             updateSeatStyle();
         }
@@ -89,7 +89,7 @@ public class Seat {
                 clientButton.setText("HR");
                 break;
         }
-        clientButton.setStyle("-fx-font-weight: bold; -fx-font-size: 11; -fx-background-color: #" + colorString + "; -fx-border-color: #000000; -fx-border-width: 1px;");
+        clientButton.setStyle("-fx-font-weight: bold; -fx-font-size: 12; -fx-background-color: #" + colorString + "; -fx-border-color: #000000; -fx-border-width: 1px;");
     }
 
     /**
@@ -98,9 +98,7 @@ public class Seat {
     private void createButton() {
 
         clientButton = new Button(getSectionTitle());
-        clientButton.setPrefWidth(45);
-        //clientButton.setMaxHeight(1);
-        //clientButton.setPrefHeight(1);
+        clientButton.setPrefWidth(50);
 
         updateSeatStyle();
 

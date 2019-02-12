@@ -20,7 +20,7 @@ public abstract class AdminButton implements EventHandler<ActionEvent> {
 
     private void initButton(String buttonTitle) {
         this.physicalButton = new Button(buttonTitle);
-        physicalButton.setPrefWidth(80);
+        physicalButton.setPrefWidth(100);
         physicalButton.setPrefHeight(10);
         this.physicalButton.setOnAction(this);
         updateStyle();
@@ -28,7 +28,7 @@ public abstract class AdminButton implements EventHandler<ActionEvent> {
 
     public void updateStyle() {
         String colorString = (selected) ? selectedButtonColor : unselectedButtonColor;
-        this.physicalButton.setStyle("-fx-font-weight: bold; -fx-font-size: 11; -fx-background-color: #" + colorString + ";");
+        this.physicalButton.setStyle("-fx-font-weight: bold; -fx-font-size: 14; -fx-background-color: #" + colorString + ";");
     }
 
     public Button getPhysicalButton() {

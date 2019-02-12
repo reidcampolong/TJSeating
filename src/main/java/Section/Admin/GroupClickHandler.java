@@ -5,6 +5,7 @@ import main.java.Section.Seat.Seat;
 import main.java.Section.Seat.SeatHandler;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -32,8 +33,10 @@ public class GroupClickHandler {
         if (toggleOn) {
             groupSeatList.clear();
         } else {
-            if (groupSeatList.size() > 0)
-                SeatHandler.handleInputForGroupSelect(groupSeatList);
+            if (groupSeatList.size() > 0) {
+                ArrayList copyList = new ArrayList(groupSeatList);
+                SeatHandler.handleInputForGroupSelect(copyList);
+            }
             removeAll();
         }
     }

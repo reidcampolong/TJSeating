@@ -56,7 +56,7 @@ public class Seat {
     public void updateSelected(boolean selected) {
         isSelected = selected;
         if (selected) {
-            clientButton.setStyle("-fx-font-weight: bold; -fx-font-size: " + fontSize + "; -fx-background-color: #ffdb00; -fx-border-color: #000000; -fx-border-width: 1px;");
+            clientButton.setStyle("-fx-font-weight: bold; -fx-font-size: " + fontSize + "; -fx-background-color: #fc33ff; -fx-border-color: #000000; -fx-border-width: 1px;");
         } else {
             updateSeatStyle();
         }

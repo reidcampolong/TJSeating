@@ -129,11 +129,12 @@ public class SeatHandler {
                 holder = "None";
             }
 
+            GroupClickHandler.i().removeAll();
+
             for (Seat s : seatList) {
                 attemptPurchase(s, newStatus, holder);
             }
 
-            GroupClickHandler.i().removeAll();
         } else {
             GroupClickHandler.i().removeAll();
         }

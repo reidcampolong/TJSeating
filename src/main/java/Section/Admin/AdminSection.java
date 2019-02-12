@@ -29,13 +29,13 @@ public class AdminSection {
         GroupButton groupButton = new GroupButton("Group");
         initializeGroupClickHandler(groupButton);
 
-        AdminButton saveButton = new OccupyButton("Save ALL");
+        //AdminButton saveButton = new OccupyButton("Save ALL");
         dayButtons.add(new DayButton("thursday", dayButtons));
         dayButtons.add(new DayButton("friday", dayButtons));
         dayButtons.add(new DayButton("satmat", dayButtons));
         dayButtons.add(new DayButton("satnight", dayButtons));
 
-        hBox.getChildren().add(saveButton.getPhysicalButton());
+        //hBox.getChildren().add(saveButton.getPhysicalButton());
         hBox.getChildren().add(groupButton.getPhysicalButton());
         for(DayButton b : dayButtons)
             hBox.getChildren().add(b.getPhysicalButton());

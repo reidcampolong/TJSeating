@@ -45,7 +45,7 @@ public class Day {
 
     private void initListener(Section section) {
         String sectionID = String.valueOf(section.getSectionNumber());
-        /*CollectionReference collectionReference = db.collection("days").document(databaseName).collection(sectionID);
+        CollectionReference collectionReference = db.collection("days").document(databaseName).collection(sectionID);
         collectionReference.addSnapshotListener((snapshots, e) -> {
             if (snapshots != null) {
                 for (DocumentChange change : snapshots.getDocumentChanges()) {
@@ -53,7 +53,7 @@ public class Day {
                     updateSeatByDoc(section, change.getDocument());
                 }
             }
-        });*/
+        });
     }
 
     private void updateSeatByDoc(Section section, QueryDocumentSnapshot document) {

@@ -11,6 +11,8 @@ import main.java.Utilities.SeatTranslator;
  */
 public class Seat {
 
+    public static String fontSize = "11";
+
     private int sectionNumber;
     private String sectionTitle;
 
@@ -52,7 +54,7 @@ public class Seat {
 
     public void updateSelected(boolean selected) {
         if (selected) {
-            clientButton.setStyle("-fx-font-weight: bold; -fx-font-size: 0; -fx-background-color: #1639ff; -fx-border-color: #000000; -fx-border-width: 1px;");
+            clientButton.setStyle("-fx-font-weight: bold; -fx-font-size: " + fontSize + "; -fx-background-color: #1639ff; -fx-border-color: #000000; -fx-border-width: 1px;");
         } else {
             updateSeatStyle();
         }
@@ -89,7 +91,7 @@ public class Seat {
                 clientButton.setText("HR");
                 break;
         }
-        clientButton.setStyle("-fx-font-weight: bold; -fx-font-size: 12; -fx-background-color: #" + colorString + "; -fx-border-color: #000000; -fx-border-width: 1px;");
+        clientButton.setStyle("-fx-font-weight: bold; -fx-font-size: " + fontSize + "; -fx-background-color: #" + colorString + "; -fx-border-color: #000000; -fx-border-width: 1px;");
     }
 
     /**
@@ -98,7 +100,7 @@ public class Seat {
     private void createButton() {
 
         clientButton = new Button(getSectionTitle());
-        clientButton.setPrefWidth(50);
+        clientButton.setPrefWidth(48);
 
         updateSeatStyle();
 

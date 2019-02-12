@@ -5,15 +5,15 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import main.java.Database.Database;
 import main.java.Section.Admin.AdminSection;
+import main.java.Section.Seat.SeatHandler;
 import main.java.Section.Section;
 import main.java.Section.SectionHandler;
-
-import java.awt.*;
 
 
 public class Client extends Application {
@@ -59,12 +59,14 @@ public class Client extends Application {
         primaryStage.setScene(scene);
         primaryStage.setMaximized(true);
 
+        primaryStage.getIcons().add(new Image(getClass().getResource("/TJLogo.png").toString()));
         primaryStage.show();
 
 
         // Loading data dialog
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Welcome to TJ Seating");
+        alert.setGraphic(SeatHandler.dataLogo);
         alert.setHeaderText(null);
         alert.setContentText("Thanks for using TJ Seating!\nYour client has started.\nDeveloped 2019 Reid C");
 

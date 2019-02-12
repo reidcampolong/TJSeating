@@ -41,8 +41,6 @@ public class Day {
         initListener(rightSection);
     }
 
-    //public void updateSeatMap(Seat[][] seatMap, )
-
     private void initListener(Section section) {
         String sectionID = String.valueOf(section.getSectionNumber());
         CollectionReference collectionReference = db.collection("days").document(databaseName).collection(sectionID);

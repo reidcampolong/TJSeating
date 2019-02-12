@@ -2,6 +2,7 @@ package main.java.Database;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.*;
+import javafx.scene.image.ImageView;
 import main.java.Client;
 import main.java.Database.Days.Day;
 import main.java.Database.Days.DayHandler;
@@ -39,6 +40,7 @@ public class Database {
         try {
             Log.i("Attempting to create connection.");
             serviceAccount = getClass().getResourceAsStream("/account.json");
+            SeatHandler.dataLogo = new ImageView(getClass().getResource("/TJLogo.png").toString());
             credentials = GoogleCredentials.fromStream(serviceAccount);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

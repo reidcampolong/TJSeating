@@ -3,7 +3,9 @@ package main.java.Section.Seat;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import javafx.util.Pair;
 import main.java.Client;
 import main.java.Network.Packet.NetworkSeat;
@@ -18,6 +20,8 @@ import java.util.Optional;
  * Handles creating popups and seat click event logic
  */
 public class SeatHandler {
+
+    public static ImageView dataLogo;
 
     public static Seat getFromNetworkSeat(NetworkSeat seat) {
         return Client.getSectionHandler().getSection(seat.getSectionNumber()).getSeatAtIndex(seat.getY(), seat.getX());
@@ -50,6 +54,7 @@ public class SeatHandler {
         Dialog<Pair<String, String>> dialog = new Dialog<>();
         dialog.setTitle(title);
         dialog.setHeaderText(headerText);
+        dialog.setGraphic(dataLogo);
 
         ButtonType finishButton = new ButtonType("Finish", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(finishButton, ButtonType.CANCEL);

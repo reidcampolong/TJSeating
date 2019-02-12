@@ -3,6 +3,8 @@ package main.java;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -58,6 +60,15 @@ public class Client extends Application {
         primaryStage.setMaximized(true);
 
         primaryStage.show();
+
+
+        // Loading data dialog
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Welcome to TJ Seating");
+        alert.setHeaderText(null);
+        alert.setContentText("Thanks for using TJ Seating!\nYour client has started.\nDeveloped 2019 Reid C");
+
+        alert.showAndWait();
 
     }
 

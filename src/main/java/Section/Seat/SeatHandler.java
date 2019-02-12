@@ -8,6 +8,7 @@ import javafx.util.Pair;
 import main.java.Client;
 import main.java.Network.Packet.NetworkSeat;
 import main.java.Section.Admin.GroupClickHandler;
+import main.java.Utilities.Log;
 import main.java.Utilities.StringUtils;
 
 import java.util.List;
@@ -132,7 +133,9 @@ public class SeatHandler {
                 attemptPurchase(s, newStatus, holder);
             }
 
-            seatList.clear();
+            GroupClickHandler.i().removeAll();
+        } else {
+            GroupClickHandler.i().removeAll();
         }
     }
 
@@ -181,7 +184,7 @@ public class SeatHandler {
     }
 
     private static void attemptPurchase(Seat seat, Status newStatus, String holder) {
-        System.out.println("Writing out...");
+        Log.i("Writing out seat...");
         /*NetworkSeat ns = new NetworkSeat(seat.getSectionNumber(), newStatus.toString(), holder, seat.getX(), seat.getY());
         TJRequest toSend = new TJRequest(TJRequest.RequestType.PURCHASE_SEAT_REQUEST, ns);
         System.out.println(toSend);

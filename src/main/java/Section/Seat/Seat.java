@@ -16,6 +16,7 @@ public class Seat {
     private int sectionNumber;
     private String sectionTitle;
 
+    private boolean isSelected;
     private Section section;
     private int x, y;
     private Button clientButton;
@@ -53,8 +54,9 @@ public class Seat {
     }
 
     public void updateSelected(boolean selected) {
+        isSelected = selected;
         if (selected) {
-            clientButton.setStyle("-fx-font-weight: bold; -fx-font-size: " + fontSize + "; -fx-background-color: #1639ff; -fx-border-color: #000000; -fx-border-width: 1px;");
+            clientButton.setStyle("-fx-font-weight: bold; -fx-font-size: " + fontSize + "; -fx-background-color: #ffdb00; -fx-border-color: #000000; -fx-border-width: 1px;");
         } else {
             updateSeatStyle();
         }
@@ -75,6 +77,7 @@ public class Seat {
     public void updateSeatStyle() {
         String colorString = "";
         clientButton.setText(getSectionTitle());
+        if(isSelected) return;
         switch (seatStatus) {
             case AVAILABLE:
                 colorString = "00ff00";

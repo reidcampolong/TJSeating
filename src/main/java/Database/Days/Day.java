@@ -49,7 +49,7 @@ public class Day {
         collectionReference.addSnapshotListener((snapshots, e) -> {
             if (snapshots != null) {
                 for (DocumentChange change : snapshots.getDocumentChanges()) {
-                    System.out.println("Received update " + change.getDocument().getId() + " " + change.getDocument().toString());
+                    Log.i("Received update " + change.getDocument().getId() + " " + change.getDocument().toString());
                     updateSeatByDoc(section, change.getDocument());
                 }
             }

@@ -37,7 +37,7 @@ public class Database {
         GoogleCredentials credentials = null;
         InputStream serviceAccount;
         try {
-            System.out.println(getClass().getResourceAsStream("main/resources/account.json"));
+            Log.i("Attempting to create connection.");
             serviceAccount = getClass().getResourceAsStream("/account.json");
             credentials = GoogleCredentials.fromStream(serviceAccount);
         } catch (FileNotFoundException e) {
@@ -51,7 +51,7 @@ public class Database {
 
         //createCollectionListener(db, "days", "thursday", "0");
         this.dayHandler = new DayHandler(db);
-        System.out.println("Try to grab data:");
+        Log.i("Loading initial data");
         try {
             switchViewTo("thursday");
         } catch (Exception e) {
@@ -89,7 +89,7 @@ public class Database {
 
         db.collection("days").document(dayname)
                 .collection(String.valueOf(seat.getSectionNumber())).document(seat.getSectionTitle()).set(docData);
-        System.out.println("Wrote seat to document.");
+        Log.i("Wrote seat to server.");
     }
 
     public void writeSeatToDoc(Seat seat, String status, String holder) {

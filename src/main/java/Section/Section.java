@@ -41,7 +41,7 @@ public class Section {
             for (int row = 0; row < seats[col].length; row++) {
 
                 // Create seat
-                Seat seat = new Seat(sectionNumber, SeatTranslator.getName(cols, col, row), col, row, "None", Status.AVAILABLE);
+                Seat seat = new Seat(sectionNumber, SeatTranslator.getName(sectionNumber, cols, col, row), col, row, "None", Status.AVAILABLE);
                 seatNameMap.put(seat.getSectionTitle(), seat);
                 seats[col][row] = seat;
 

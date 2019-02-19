@@ -12,9 +12,9 @@ import java.util.HashMap;
  */
 public class SectionHandler {
 
-    public static int[] sectionAValues = {0, 31, 7};
-    public static int[] sectionBValues = {1, 29, 14};
-    public static int[] sectionCValues = {2, 31, 7};
+    public static int[] sectionAValues = {0, 29, 7};
+    public static int[] sectionBValues = {1, 27, 14};
+    public static int[] sectionCValues = {2, 29, 7};
 
     private HBox horozontalContainer;
     private HashMap<Integer, Section> sectionMap;

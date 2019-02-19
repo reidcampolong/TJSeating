@@ -11,7 +11,7 @@ import main.java.Utilities.SeatTranslator;
  */
 public class Seat {
 
-    public static String fontSize = "10";
+    public static String fontSize = "8";
 
     private int sectionNumber;
     private String sectionTitle;
@@ -87,7 +87,7 @@ public class Seat {
                 break;
             case BLACK:
                 colorString = "6d6d6d";
-                clientButton.setText("TJ");
+                clientButton.setText("");
                 break;
             case HANDICAP:
                 colorString = "0085FF";
@@ -103,7 +103,7 @@ public class Seat {
     private void createButton() {
 
         clientButton = new Button(getSectionTitle());
-        clientButton.setPrefWidth(44);
+        clientButton.setPrefWidth(38);
 
         updateSeatStyle();
 

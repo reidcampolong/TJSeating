@@ -5,7 +5,7 @@ import javafx.scene.layout.HBox;
 import main.java.Section.Admin.Buttons.AdminButton;
 import main.java.Section.Admin.Buttons.DayButton;
 import main.java.Section.Admin.Buttons.GroupButton;
-import main.java.Section.Admin.Buttons.OccupyButton;
+import main.java.Section.Admin.Buttons.SaveALLButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class AdminSection {
         GroupButton groupButton = new GroupButton("Group");
         initializeGroupClickHandler(groupButton);
 
-        //AdminButton saveButton = new OccupyButton("Save ALL");
+        //AdminButton saveButton = new SaveALLButton("Save ALL");
         dayButtons.add(new DayButton("thursday", dayButtons));
         dayButtons.add(new DayButton("friday", dayButtons));
         dayButtons.add(new DayButton("satmat", dayButtons));

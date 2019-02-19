@@ -25,11 +25,9 @@ public class Database {
 
     private DayHandler dayHandler;
 
-    private Client client;
     private Firestore db;
 
-    public Database(Client client) {
-        this.client = client;
+    public Database() {
         initializeConnection();
     }
 

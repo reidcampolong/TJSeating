@@ -15,7 +15,6 @@ import java.util.List;
 
 public class Day {
 
-    private Database database;
     private Firestore db;
     private String databaseName;
 
@@ -23,7 +22,6 @@ public class Day {
 
     public Day(Firestore db, String databaseName) {
         this.db = db;
-        //this.database = database;
         this.databaseName = databaseName;
         leftSection = new Section(SectionHandler.sectionAValues[0], SectionHandler.sectionAValues[1], SectionHandler.sectionAValues[2]);
         middleSection = new Section(SectionHandler.sectionBValues[0], SectionHandler.sectionBValues[1], SectionHandler.sectionBValues[2]);

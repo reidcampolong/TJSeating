@@ -2,6 +2,7 @@ package main.java.Section.Seat;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import main.java.Client;
 import main.java.Listeners.SeatClickListener;
 import main.java.Section.Section;
 import main.java.Utilities.SeatTranslator;
@@ -39,6 +40,7 @@ public class Seat {
         this.seatHolder = seatHolder;
         this.seatStatus = seatStatus;
         this.sectionTitle = name;
+        fontSize = Client.bigMode ? "11" : "8";
 
         createButton();
     }
@@ -103,7 +105,11 @@ public class Seat {
     private void createButton() {
 
         clientButton = new Button(getSectionTitle());
-        clientButton.setPrefWidth(38);
+        if(Client.bigMode) {
+            clientButton.setPrefWidth(45);
+        } else {
+            clientButton.setPrefWidth(38);
+        }
 
         updateSeatStyle();
 

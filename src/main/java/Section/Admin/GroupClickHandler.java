@@ -66,6 +66,10 @@ public class GroupClickHandler {
         return groupSeatList.contains(seat);
     }
 
+    /**
+     * Removes a seat from list
+     * @param seat
+     */
     public void remFromList(Seat seat) {
         if (groupSeatList.contains(seat)) {
             seat.updateSelected(false);

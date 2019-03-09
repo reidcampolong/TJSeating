@@ -1,16 +1,22 @@
 package main.java.Utilities;
 
+/**
+ * Translates seat names back and forth
+ */
 public class SeatTranslator {
 
-    public static int[] getPosition(String seatName) {
-        if (seatName.length() == 2) {
-            // A1
-            int index = ((int) seatName.charAt(0)) - 65;
-            return new int[]{index, Integer.valueOf(seatName.charAt(1))};
-        }
-        return null;
-    }
+    /** The order of seats **/
+    public static final String[] seatAlphabet = {"A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "AA", "BB", "CC", "DD", "EE"};
 
+    /**
+     * Gets a seat's display name in a section
+     *
+     * @param sectionNumber
+     * @param maxCols
+     * @param y
+     * @param x
+     * @return
+     */
     public static String getName(int sectionNumber, int maxCols, int y, int x) {
         String title = seatAlphabet[(maxCols - y - 1)];
         int seatNumberMod = 1;
@@ -22,7 +28,7 @@ public class SeatTranslator {
             if (title.startsWith("M"))
                 seatNumberMod -= 2;
         } else if (sectionNumber == 2) {
-            if ( (title.startsWith("A") && !title.startsWith("AA")) || (title.startsWith("B") && (!title.startsWith("BB"))))
+            if ((title.startsWith("A") && !title.startsWith("AA")) || (title.startsWith("B") && (!title.startsWith("BB"))))
                 seatNumberMod -= 4;
         }
 
@@ -30,21 +36,4 @@ public class SeatTranslator {
         return title + (x + seatNumberMod);
     }
 
-    /**
-     * String title = Trans.numToAlpha(x) + (y + 1);
-     * if (region == Region.B) {
-     * if (x < 13 && title.startsWith("M")) {
-     * String[] splitter = title.split("(?<=\\D)(?=\\d)");
-     * title = splitter[0] + (Integer.valueOf(splitter[1]) - 2);
-     * }
-     * } else if (x < 2 && region == Region.C) {
-     * if ((title.startsWith("A") || (title.startsWith("B")))) {
-     * String[] splitter = title.split("(?<=\\D)(?=\\d)");
-     * title = splitter[0] + (Integer.valueOf(splitter[1]) - 4);
-     * }
-     * }
-     */
-
-
-    public static String[] seatAlphabet = {"A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "AA", "BB", "CC", "DD", "EE"};
 }

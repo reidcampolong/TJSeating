@@ -17,7 +17,7 @@ import main.java.Utilities.Utilities;
 public class Client extends Application {
 
     public static boolean bigMode = true;
-    private static final String VERSION = " 3.1.0";
+    private static final String VERSION = " 3.1.1";
 
     private static SectionHandler sectionHandler;
     private static Database database;

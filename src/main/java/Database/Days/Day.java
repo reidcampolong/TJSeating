@@ -13,6 +13,9 @@ import main.java.Utilities.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * An object that holds listeners to it's database connections
+ */
 public class Day {
 
     private Firestore db;

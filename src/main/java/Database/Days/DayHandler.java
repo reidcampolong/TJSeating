@@ -1,14 +1,13 @@
 package main.java.Database.Days;
 
 import com.google.cloud.firestore.Firestore;
-import main.java.Client;
-import main.java.Database.Database;
-import main.java.Section.Seat.SeatHandler;
-import main.java.Section.SectionHandler;
 import main.java.Utilities.Utilities;
 
 import java.util.HashMap;
 
+/**
+ * Manages the different datasets of days
+ */
 public class DayHandler {
 
     private Firestore db;
@@ -19,7 +18,6 @@ public class DayHandler {
         this.db = db;
         dayHashMap = new HashMap<>(4);
         createDay("thursday");
-
     }
 
     public Day getCurrentDay() {

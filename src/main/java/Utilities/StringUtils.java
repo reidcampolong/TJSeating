@@ -1,7 +1,7 @@
 package main.java.Utilities;
 
 /**
- * Created by Reid on 1/31/19.
+ * Utilities class for string functions
  */
 public class StringUtils {
 

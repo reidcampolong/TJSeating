@@ -4,7 +4,7 @@ import javafx.scene.control.Alert;
 import main.java.Section.Seat.SeatHandler;
 
 /**
- * Created by Reid on 2/18/19.
+ * Utilities class that allows for creating popups
  */
 public class Utilities {
 

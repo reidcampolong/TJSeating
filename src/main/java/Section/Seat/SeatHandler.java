@@ -106,6 +106,10 @@ public class SeatHandler {
         alert.showAndWait();
     }
 
+    /**
+     * Modify a group of seats
+     * @param seatList
+     */
     public static void handleInputForGroupSelect(List<Seat> seatList) {
         String headerText = "Modifying " + seatList.size() + " seats";
 
@@ -189,12 +193,14 @@ public class SeatHandler {
         }
     }
 
+    /**
+     * Write out changes to database and save them
+     * @param seat
+     * @param newStatus
+     * @param holder
+     */
     private static void attemptPurchase(Seat seat, Status newStatus, String holder) {
         Log.i("Writing out seat...");
-        /*NetworkSeat ns = new NetworkSeat(seat.getSectionNumber(), newStatus.toString(), holder, seat.getX(), seat.getY());
-        TJRequest toSend = new TJRequest(TJRequest.RequestType.PURCHASE_SEAT_REQUEST, ns);
-        System.out.println(toSend);
-        Client.getConnection().writeOut(toSend);*/
         Client.getDatabase().writeSeatToDoc(seat, newStatus.toString(), holder);
     }
 }

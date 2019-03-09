@@ -18,7 +18,6 @@ public class Seat {
     private String sectionTitle;
 
     private boolean isSelected;
-    private Section section;
     private int x, y;
     private Button clientButton;
 
@@ -79,7 +78,7 @@ public class Seat {
     public void updateSeatStyle() {
         String colorString = "";
         clientButton.setText(getSectionTitle());
-        if(isSelected) return;
+        if (isSelected) return;
         switch (seatStatus) {
             case AVAILABLE:
                 colorString = "00ff00";
@@ -105,7 +104,7 @@ public class Seat {
     private void createButton() {
 
         clientButton = new Button(getSectionTitle());
-        if(Client.bigMode) {
+        if (Client.bigMode) {
             clientButton.setPrefWidth(45);
         } else {
             clientButton.setPrefWidth(38);

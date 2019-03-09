@@ -64,12 +64,7 @@ public class Database {
         dayHandler.changeDayTo(dayName);
     }
 
-    /**
-     * Update a seat visually from the database
-     *
-     * @param section
-     * @param document
-     */
+    /*
     private void updateSeatByDoc(Section section, QueryDocumentSnapshot document) {
         Log.i("Updating seat to " + document.getData().get("status").toString());
         Seat seat = section.getSeatByName(document.getId());
@@ -80,7 +75,7 @@ public class Database {
 
     private void updateSeatByDoc(Section section, DocumentChange dc) {
         updateSeatByDoc(section, dc.getDocument());
-    }
+    }*/
 
     public void writeSeatToDoc(String dayname, Seat seat, String status, String holder) {
         Map<String, Object> docData = new HashMap<>();
